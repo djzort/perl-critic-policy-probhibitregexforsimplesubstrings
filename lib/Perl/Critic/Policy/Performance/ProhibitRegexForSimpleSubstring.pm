@@ -1,4 +1,5 @@
 #!/bin/false
+# PODNAME: Perl::Critic::Policy::Performance::ProhibitRegexForSimpleSubstring
 # ABSTRACT: Use index() instead of regex for literal substring matching
 
 use strict;
@@ -72,10 +73,6 @@ sub violates {
 
 __END__
 
-=head1 NAME
-
-Perl::Critic::Policy::Performance::ProhibitRegexForSimpleSubstring - Use C<index()> instead of regex for literal substring matching
-
 =head1 AFFILIATION
 
 This policy is part of the Perl-Critic-Policy-Performance-ProhibitRegexForSimpleSubstring
@@ -84,11 +81,11 @@ distribution.
 =head1 DESCRIPTION
 
 When searching for a literal substring in a string, using a regular expression
-is unnecessary overhead. The C<index()> function is significantly faster because
+is avoidable overhead. The C<index()> function is significantly faster because
 it avoids regex compilation and interpretation.
 
   # Bad: regex for simple substring
-  if ( $str =~ /foo/ )     { ... }
+  if ( $str =~ m/foo/ )     { ... }
   if ( $str =~ /bar\.baz/ ) { ... }  # escaped dot is still a literal
 
   # Good: use index() instead
@@ -129,16 +126,5 @@ This policy has no additional configuration options beyond the standard ones.
 =head2 supported_parameters
 
 Returns an empty list. This policy has no configurable parameters.
-
-=head1 AUTHOR
-
-Dean Hamstead <dean@fragfest.com.au>
-
-=head1 COPYRIGHT
-
-Copyright (c) 2026 Dean Hamstead. All rights reserved.
-
-This program is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
 
 =cut
